@@ -1,0 +1,137 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f2f7fb;
+  color: #333;
+}
+.carrier-logo {
+  height: 40px;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+.carrier-logo:hover {
+  filter: grayscale(0%) drop-shadow(0 0 3px #007bff);
+  transform: scale(1.05);
+}
+header {
+  background: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+.countdown {
+  background: #ffcc00;
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+}
+.form-container {
+  max-width: 300px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  position: relative;
+}
+.progress-bar {
+  height: 6px;
+  background: #007bff;
+  width: 0;
+  transition: width 0.4s ease;
+}
+.form-wrapper {
+  display: block;
+  width: 100%;
+}
+.form-step {
+  padding: 0 15px;
+  box-sizing: border-box;
+  min-height: 140px;
+  text-align: center;
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+input[type="text"], input[type="email"], input[type="date"] {
+  width: 80%;
+  padding: 8px;
+  margin: 8px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+}
+button {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+.button-group button {
+  flex: 1;
+}
+.trust-logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.trust-logos img {
+  margin: 10px;
+}
+.trust-logos .logo-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+.testimonial {
+  text-align: center;
+  margin: 20px auto;
+}
+.phone-number {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 15px;
+}
+.privacy-note {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin-top: 15px;
+}
+.confirmation {
+  display: none;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 20px;
+}
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255, 204, 0, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0px rgba(255, 204, 0, 0.7);
+  }
+}
