@@ -65,7 +65,7 @@
       text-align: center;
       margin-bottom: 20px;
     }
-    input[type="text"], input[type="email"], input[type="date"] {
+    input[type="text"], input[type="email"] {
       width: 80%;
       padding: 8px;
       margin: 8px auto;
@@ -129,20 +129,6 @@
       font-size: 20px;
       margin-top: 20px;
     }
-    @keyframes pulseGlow {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0px rgba(255, 204, 0, 0.7);
-      }
-      50% {
-        transform: scale(1.05);
-        box-shadow: 0 0 15px rgba(255, 204, 0, 0.9);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0px rgba(255, 204, 0, 0.7);
-      }
-    }
   </style>
 </head>
 <body>
@@ -160,7 +146,35 @@
     <div id="progress-message" style="text-align:center; font-size: 13px; margin-top: 4px;"></div>
     <h2>Get a Free Quote Now</h2>
     <form id="quote-form">
-      <!-- Form steps here (unchanged) -->
+      <div class="form-wrapper">
+        <div class="form-step" style="display:block;">
+          <input type="text" name="zip" placeholder="ZIP Code">
+          <button type="button" onclick="nextStep(1)">Next</button>
+        </div>
+        <div class="form-step">
+          <div style="display: flex; justify-content: center; gap: 5px;">
+            <input type="text" name="first_name" placeholder="First Name" style="width: 48%; text-align: center;">
+            <input type="text" name="last_name" placeholder="Last Name" style="width: 48%; text-align: center;">
+          </div>
+          <div style="display: flex; justify-content: center; gap: 5px;">
+            <input type="text" name="dob_month" placeholder="MM" style="width: 30%;">
+            <input type="text" name="dob_day" placeholder="DD" style="width: 30%;">
+            <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;">
+          </div>
+          <div class="button-group">
+            <button type="button" onclick="prevStep(1)">Back</button>
+            <button type="button" onclick="nextStep(2)">Next</button>
+          </div>
+        </div>
+        <div class="form-step">
+          <input type="email" name="email" placeholder="Email Address">
+          <input type="text" name="address" placeholder="Home Address">
+          <div class="button-group">
+            <button type="button" onclick="prevStep(2)">Back</button>
+            <button type="submit">See Plans & Prices</button>
+          </div>
+        </div>
+      </div>
     </form>
     <div class="confirmation" id="confirmation">
       🎉 You’re all set! Call now to speak with a licensed agent:<br>
@@ -186,7 +200,6 @@
   </div>
   <script>
     window.addEventListener("DOMContentLoaded", function () {
-      // Timer
       let timer = 300;
       const timerDisplay = document.getElementById("timer");
       setInterval(() => {
@@ -198,7 +211,6 @@
         }
       }, 1000);
 
-      // Navigation functions
       function nextStep(step) {
         const steps = document.querySelectorAll('.form-step');
         steps.forEach((el, i) => el.style.display = i === step ? 'block' : 'none');
@@ -242,7 +254,6 @@
         document.getElementById("progress-message").textContent = message;
       }
 
-      // Submit handler
       document.getElementById("quote-form").addEventListener("submit", function(event) {
         event.preventDefault();
         document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
@@ -257,11 +268,9 @@
         });
       });
 
-      // Expose for button clicks
       window.nextStep = nextStep;
       window.prevStep = prevStep;
 
-      // Initialize
       nextStep(0);
     });
   </script>
