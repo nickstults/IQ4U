@@ -319,16 +319,20 @@
   </div>
  
 
-    document.getElementById("quote-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-      document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
-      document.getElementById("confirmation").style.display = "block";
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-      });
+    <script>
+  document.getElementById("quote-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
+    document.getElementById("confirmation").style.display = "block";
+    document.getElementById("progress-bar").style.width = "100%";
+    document.getElementById("progress-percent").textContent = "100%";
+    document.getElementById("progress-message").textContent = "Complete!";
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
     });
+  });
  <script>
   function nextStep(step) {
     const steps = document.querySelectorAll('.form-step');
