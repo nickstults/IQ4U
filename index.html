@@ -168,18 +168,22 @@
             <button type="button" onclick="nextStep(2)">Next</button>
           </div>
         </div>
-        <div class="form-step">
-          <input type="email" name="email" placeholder="Email Address">
-          <input type="text" name="address" placeholder="Home Address">
-          <div class="button-group">
-            <label style="font-size: 12px; display: block; text-align: left; margin: 10px auto;">
-  <input type="checkbox" id="consent" required checked>
-  I agree to be contacted by a licensed agent and accept the <a href="/terms" target="_blank">Terms & Privacy Policy</a>.
-</label>
-            <button type="button" onclick="prevStep(2)">Back</button>
-            <button type="submit">See Plans & Prices</button>
-          </div>
-        </div>
+       <div class="form-step">
+  <input type="email" name="email" placeholder="Email Address">
+  <input type="text" name="address" placeholder="Home Address">
+
+  <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #333; text-align: left; margin: 12px 0; line-height: 1.4;">
+    <input type="checkbox" id="consent" required checked style="margin-top: 4px; transform: scale(1.2); cursor: pointer;">
+    I agree to be contacted by a licensed agent and accept the
+    <a href="/terms" target="_blank" style="color: #007bff; text-decoration: underline;">Terms & Privacy Policy</a>.
+  </label>
+
+  <div class="button-group" style="margin-top: 12px;">
+    <button type="button" style="background-color: #ccc; color: #333;" onclick="prevStep(2)">Back</button>
+    <button type="submit" style="background-color: #007bff; color: white;">See Plans & Prices</button>
+  </div>
+</div>
+
       </div>
     </form>
     <div class="confirmation" id="confirmation">
