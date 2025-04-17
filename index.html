@@ -133,11 +133,11 @@
 </head>
 <body>
   <header>
-      <div style="background: #fefefe; padding: 10px; border-bottom: 2px solid #007bff; text-align: center;">
-    <p style="margin: 0; font-size: 18px; font-weight: bold; color: #007bff;">✅ Get Instant Health Coverage Quotes</p>
-    <p style="margin: 5px 0; font-size: 14px; color: #333;">Licensed Agents • ACA & Private Plans • All Major Carriers</p>
-    <p style="margin: 0; font-size: 14px; color: red; font-weight: bold;">Limited Enrollment Period – Don’t Miss Out!</p>
-  </div>
+    <div style="background: #fefefe; padding: 10px; border-bottom: 2px solid #007bff; text-align: center;">
+      <p style="margin: 0; font-size: 18px; font-weight: bold; color: #007bff;">✅ Get Instant Health Coverage Quotes</p>
+      <p style="margin: 5px 0; font-size: 14px; color: #333;">Licensed Agents • ACA & Private Plans • All Major Carriers</p>
+      <p style="margin: 0; font-size: 14px; color: red; font-weight: bold;">Limited Enrollment Period – Don’t Miss Out!</p>
+    </div>
   </header>
   <div class="countdown">
     We're holding your spot in the queue: <span id="timer" style="color: red;">05:00</span>
@@ -168,22 +168,21 @@
             <button type="button" onclick="nextStep(2)">Next</button>
           </div>
         </div>
-       <div class="form-step">
-  <input type="email" name="email" placeholder="Email Address">
-  <input type="text" name="address" placeholder="Home Address">
+        <div class="form-step">
+          <input type="email" name="email" placeholder="Email Address">
+          <input type="text" name="address" placeholder="Home Address">
 
-  <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #333; text-align: left; margin: 12px 0; line-height: 1.4;">
-    <input type="checkbox" id="consent" required checked style="margin-top: 4px; transform: scale(1.2); cursor: pointer;">
-    I agree to be contacted by a licensed agent and accept the
-    <a href="/terms" target="_blank" style="color: #007bff; text-decoration: underline;">Terms & Privacy Policy</a>.
-  </label>
+          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #333; text-align: left; margin: 12px 0; line-height: 1.4;">
+            <input type="checkbox" id="consent" required checked style="margin-top: 4px; transform: scale(1.2); cursor: pointer;">
+            I agree to be contacted by a licensed agent and accept the
+            <a href="/terms" target="_blank" style="color: #007bff; text-decoration: underline;">Terms & Privacy Policy</a>.
+          </label>
 
-  <div class="button-group" style="margin-top: 12px;">
-    <button type="button" style="background-color: #ccc; color: #333;" onclick="prevStep(2)">Back</button>
-    <button type="submit" style="background-color: #007bff; color: white;">See Plans & Prices</button>
-  </div>
-</div>
-
+          <div class="button-group" style="margin-top: 12px;">
+            <button type="button" style="background-color: #ccc; color: #333;" onclick="prevStep(2)">Back</button>
+            <button type="submit" style="background-color: #007bff; color: white;">See Plans & Prices</button>
+          </div>
+        </div>
       </div>
     </form>
     <div class="confirmation" id="confirmation">
@@ -217,7 +216,7 @@
           timer--;
           const minutes = String(Math.floor(timer / 60)).padStart(2, '0');
           const seconds = String(timer % 60).padStart(2, '0');
-          timerDisplay.textContent = ${minutes}:${seconds};
+          timerDisplay.textContent = `${minutes}:${seconds}`;
         }
       }, 1000);
 
@@ -239,8 +238,8 @@
           message = 'So close!';
         }
 
-        bar.style.width = ${percent}%;
-        document.getElementById("progress-percent").textContent = ${percent}%;
+        bar.style.width = `${percent}%`;
+        document.getElementById("progress-percent").textContent = `${percent}%`;
         document.getElementById("progress-message").textContent = message;
       }
 
@@ -259,8 +258,8 @@
           message = 'Almost there!';
         }
 
-        bar.style.width = ${percent}%;
-        document.getElementById("progress-percent").textContent = ${percent}%;
+        bar.style.width = `${percent}%`;
+        document.getElementById("progress-percent").textContent = `${percent}%`;
         document.getElementById("progress-message").textContent = message;
       }
 
@@ -286,3 +285,4 @@
   </script>
 </body>
 </html>
+
