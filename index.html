@@ -51,21 +51,11 @@
       width: 0;
       transition: width 0.4s ease;
     }
-    .form-wrapper {
-      display: block;
-      width: 100%;
-    }
-    .form-step {
-      padding: 0 15px;
-      box-sizing: border-box;
-      min-height: 140px;
-      text-align: center;
-    }
     .form-container h2 {
       text-align: center;
       margin-bottom: 20px;
     }
-    input[type="text"], input[type="email"] {
+    input[type="text"], input[type="email"], input[type="tel"] {
       width: 80%;
       padding: 8px;
       margin: 8px auto;
@@ -98,9 +88,6 @@
       flex-direction: column;
       align-items: center;
     }
-    .trust-logos img {
-      margin: 10px;
-    }
     .trust-logos .logo-row {
       display: flex;
       justify-content: center;
@@ -108,32 +95,19 @@
       gap: 15px;
       margin-bottom: 10px;
     }
-    .testimonial {
+    .testimonial, .phone-number, .privacy-note, .confirmation {
       text-align: center;
       margin: 20px auto;
     }
-    .phone-number {
-      font-size: 20px;
-      text-align: center;
-      margin-top: 15px;
-    }
-    .privacy-note {
-      text-align: center;
-      font-size: 12px;
-      color: #777;
-      margin-top: 15px;
-    }
     .confirmation {
       display: none;
-      text-align: center;
       font-size: 20px;
-      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <header>
-    <div style="background: #fefefe; padding: 10px; border-bottom: 2px solid #007bff; text-align: center;">
+    <div style="background: #fefefe; padding: 10px; border-bottom: 2px solid #007bff;">
       <p style="margin: 0; font-size: 18px; font-weight: bold; color: #007bff;">✅ Get Instant Health Coverage Quotes</p>
       <p style="margin: 5px 0; font-size: 14px; color: #333;">Licensed Agents • ACA & Private Plans • All Major Carriers</p>
       <p style="margin: 0; font-size: 14px; color: red; font-weight: bold;">Limited Enrollment Period – Don’t Miss Out!</p>
@@ -149,44 +123,36 @@
     <h2>Get a Free Quote Now</h2>
     <form id="quote-form">
       <div class="form-wrapper">
-        <div class="form-step" style="display:block;">
-          <input type="text" name="zip" placeholder="ZIP Code">
+        <div class="form-step" id="step-0">
+          <input type="text" name="zip" placeholder="ZIP Code" required>
           <button type="button" onclick="nextStep(1)">Next</button>
         </div>
-        <div class="form-step">
+        <div class="form-step" id="step-1" style="display: none;">
           <div style="display: flex; justify-content: center; gap: 5px;">
-  <input type="text" name="first_name" placeholder="First Name" style="width: 48%; text-align: center;">
-  <input type="text" name="last_name" placeholder="Last Name" style="width: 48%; text-align: center;">
-</div>
-
-<div style="display: flex; justify-content: center; gap: 5px;">
-  <input type="tel" name="Primary_Phone" placeholder="Phone Number" style="width: 100%; text-align: center;">
-</div>
-
-<div style="display: flex; justify-content: center; gap: 5px;">
-  <input type="text" name="dob_month" placeholder="MM" style="width: 30%;">
-  <input type="text" name="dob_day" placeholder="DD" style="width: 30%;">
-  <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;">
-</div>
-
+            <input type="text" name="first_name" placeholder="First Name" style="width: 48%;" required>
+            <input type="text" name="last_name" placeholder="Last Name" style="width: 48%;" required>
+          </div>
+          <input type="tel" name="Primary_Phone" placeholder="Phone Number" required>
+          <div style="display: flex; justify-content: center; gap: 5px;">
+            <input type="text" name="dob_month" placeholder="MM" style="width: 30%;" required>
+            <input type="text" name="dob_day" placeholder="DD" style="width: 30%;" required>
+            <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;" required>
+          </div>
           <div class="button-group">
-            <button type="button" onclick="prevStep(1)">Back</button>
+            <button type="button" onclick="prevStep(0)">Back</button>
             <button type="button" onclick="nextStep(2)">Next</button>
           </div>
         </div>
-        <div class="form-step">
-          <input type="email" name="email" placeholder="Email Address">
-          <input type="text" name="address" placeholder="Home Address">
-
-          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #333; text-align: left; margin: 12px 0; line-height: 1.4;">
-  <input type="checkbox" id="consent" required checked style="margin-top: 4px; transform: scale(1.2); cursor: pointer;">
-  I agree to be contacted by a licensed agent and accept the
-  <a href="terms.html" target="_blank" style="color: #007bff; text-decoration: underline;">Terms & Privacy Policy</a>.
-</label>
-
-
-          <div class="button-group" style="margin-top: 12px;">
-            <button type="button" style="background-color: #ccc; color: #333;" onclick="prevStep(2)">Back</button>
+        <div class="form-step" id="step-2" style="display: none;">
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="text" name="address" placeholder="Home Address" required>
+          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px; margin: 12px 0;">
+            <input type="checkbox" name="consent" required checked style="margin-top: 4px; transform: scale(1.2);">
+            I agree to be contacted by a licensed agent and accept the
+            <a href="terms.html" target="_blank">Terms & Privacy Policy</a>.
+          </label>
+          <div class="button-group">
+            <button type="button" onclick="prevStep(1)" style="background-color: #ccc; color: #333;">Back</button>
             <button type="submit" style="background-color: #007bff; color: white;">See Plans & Prices</button>
           </div>
         </div>
@@ -215,7 +181,22 @@
     Your information is safe and secure. HIPAA-compliant & encrypted.
   </div>
   <script>
-    window.addEventListener("DOMContentLoaded", function () {
+    let currentStep = 0;
+    function showStep(step) {
+      const steps = document.querySelectorAll('.form-step');
+      steps.forEach((el, i) => el.style.display = i === step ? 'block' : 'none');
+      const bar = document.getElementById("progress-bar");
+      const percent = step === 0 ? 0 : step === 1 ? 50 : 75;
+      const message = step === 1 ? "Almost there!" : step === 2 ? "So close!" : "";
+      bar.style.width = percent + "%";
+      document.getElementById("progress-percent").textContent = percent + "%";
+      document.getElementById("progress-message").textContent = message;
+      currentStep = step;
+    }
+    function nextStep(step) { showStep(step); }
+    function prevStep(step) { showStep(step); }
+    document.addEventListener("DOMContentLoaded", function () {
+      showStep(0);
       let timer = 300;
       const timerDisplay = document.getElementById("timer");
       setInterval(() => {
@@ -226,70 +207,19 @@
           timerDisplay.textContent = `${minutes}:${seconds}`;
         }
       }, 1000);
-
-      function nextStep(step) {
-        const steps = document.querySelectorAll('.form-step');
-        steps.forEach((el, i) => el.style.display = i === step ? 'block' : 'none');
-
-        const bar = document.getElementById("progress-bar");
-        let percent = 0;
-        let message = "";
-
-        if (step === 0) {
-          percent = 0;
-        } else if (step === 1) {
-          percent = 50;
-          message = 'Almost there!';
-        } else if (step === 2) {
-          percent = 75;
-          message = 'So close!';
-        }
-
-        bar.style.width = `${percent}%`;
-        document.getElementById("progress-percent").textContent = `${percent}%`;
-        document.getElementById("progress-message").textContent = message;
-      }
-
-      function prevStep(step) {
-        const steps = document.querySelectorAll('.form-step');
-        steps.forEach((el, i) => el.style.display = i === (step - 1) ? 'block' : 'none');
-
-        const bar = document.getElementById("progress-bar");
-        let percent = 0;
-        let message = "";
-
-        if (step === 1) {
-          percent = 0;
-        } else if (step === 2) {
-          percent = 50;
-          message = 'Almost there!';
-        }
-
-        bar.style.width = `${percent}%`;
-        document.getElementById("progress-percent").textContent = `${percent}%`;
-        document.getElementById("progress-message").textContent = message;
-      }
-
-      document.getElementById("quote-form").addEventListener("submit", function(event) {
-        event.preventDefault();
+      document.getElementById("quote-form").addEventListener("submit", function (e) {
+        e.preventDefault();
         document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
         document.getElementById("confirmation").style.display = "block";
         document.getElementById("progress-bar").style.width = "100%";
         document.getElementById("progress-percent").textContent = "100%";
         document.getElementById("progress-message").textContent = "Complete!";
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
       });
-
-      window.nextStep = nextStep;
-      window.prevStep = prevStep;
-
-      nextStep(0);
     });
   </script>
 </body>
 </html>
+
+  
 
