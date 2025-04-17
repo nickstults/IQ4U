@@ -13,19 +13,16 @@
       background: #f2f7fb;
       color: #333;
     }
-    .carrier-logo {
-      height: 40px;
-      filter: grayscale(100%);
-      transition: all 0.3s ease;
-    }
-    .carrier-logo:hover {
-      filter: grayscale(0%) drop-shadow(0 0 3px #007bff);
-      transform: scale(1.05);
-    }
-    header {
+    .header {
       background: #007bff;
       color: #fff;
       padding: 10px;
+      text-align: center;
+    }
+    .banner {
+      background: #fefefe;
+      padding: 10px;
+      border-bottom: 2px solid #007bff;
       text-align: center;
     }
     .countdown {
@@ -44,16 +41,6 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       overflow: hidden;
       position: relative;
-    }
-    .progress-bar {
-      height: 6px;
-      background: #007bff;
-      width: 0;
-      transition: width 0.4s ease;
-    }
-    .form-container h2 {
-      text-align: center;
-      margin-bottom: 20px;
     }
     input[type="text"], input[type="email"], input[type="tel"] {
       width: 80%;
@@ -76,24 +63,12 @@
       cursor: pointer;
       margin-top: 10px;
     }
-    .button-group {
-      display: flex;
-      gap: 10px;
-    }
-    .button-group button {
-      flex: 1;
-    }
     .trust-logos {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .trust-logos .logo-row {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 15px;
-      margin-bottom: 10px;
+      margin: 20px auto;
     }
     .testimonial, .phone-number, .privacy-note, .confirmation {
       text-align: center;
@@ -106,57 +81,35 @@
   </style>
 </head>
 <body>
-  <header>
-    <div style="background: #fefefe; padding: 10px; border-bottom: 2px solid #007bff;">
+  <div class="header">
+    <div class="banner">
       <p style="margin: 0; font-size: 18px; font-weight: bold; color: #007bff;">✅ Get Instant Health Coverage Quotes</p>
       <p style="margin: 5px 0; font-size: 14px; color: #333;">Licensed Agents • ACA & Private Plans • All Major Carriers</p>
       <p style="margin: 0; font-size: 14px; color: red; font-weight: bold;">Limited Enrollment Period – Don’t Miss Out!</p>
     </div>
-  </header>
+  </div>
   <div class="countdown">
     We're holding your spot in the queue: <span id="timer" style="color: red;">05:00</span>
   </div>
   <div class="form-container">
-    <div class="progress-bar" id="progress-bar"></div>
-    <div id="progress-percent" style="text-align:center; font-size: 26px; font-weight: bold;">0%</div>
-    <div id="progress-message" style="text-align:center; font-size: 26px; margin-top: 4px;"></div>
     <h2>Get a Free Quote Now</h2>
     <form id="quote-form">
-      <div class="form-wrapper">
-        <div class="form-step" id="step-0">
-          <input type="text" name="zip" placeholder="ZIP Code" required>
-          <button type="button" onclick="nextStep(1)">Next</button>
-        </div>
-        <div class="form-step" id="step-1" style="display: none;">
-          <div style="display: flex; justify-content: center; gap: 5px;">
-            <input type="text" name="first_name" placeholder="First Name" style="width: 48%;" required>
-            <input type="text" name="last_name" placeholder="Last Name" style="width: 48%;" required>
-          </div>
-          <input type="tel" name="Primary_Phone" placeholder="Phone Number" required>
-          <div style="display: flex; justify-content: center; gap: 5px;">
-            <input type="text" name="dob_month" placeholder="MM" style="width: 30%;" required>
-            <input type="text" name="dob_day" placeholder="DD" style="width: 30%;" required>
-            <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;" required>
-          </div>
-          <div class="button-group">
-            <button type="button" onclick="prevStep(0)">Back</button>
-            <button type="button" onclick="nextStep(2)">Next</button>
-          </div>
-        </div>
-        <div class="form-step" id="step-2" style="display: none;">
-          <input type="email" name="email" placeholder="Email Address" required>
-          <input type="text" name="address" placeholder="Home Address" required>
-          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 13px; margin: 12px 0;">
-            <input type="checkbox" name="consent" required checked style="margin-top: 4px; transform: scale(1.2);">
-            I agree to be contacted by a licensed agent and accept the
-            <a href="terms.html" target="_blank">Terms & Privacy Policy</a>.
-          </label>
-          <div class="button-group">
-            <button type="button" onclick="prevStep(1)" style="background-color: #ccc; color: #333;">Back</button>
-            <button type="submit" style="background-color: #007bff; color: white;">See Plans & Prices</button>
-          </div>
-        </div>
+      <input type="text" name="first_name" placeholder="First Name" required>
+      <input type="text" name="last_name" placeholder="Last Name" required>
+      <input type="text" name="zip" placeholder="ZIP Code" required>
+      <input type="text" name="address" placeholder="Home Address" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="Primary_Phone" placeholder="Phone Number" required>
+      <div style="display: flex; gap: 5px; justify-content: center;">
+        <input type="text" name="dob_month" placeholder="MM" style="width: 30%;" required>
+        <input type="text" name="dob_day" placeholder="DD" style="width: 30%;" required>
+        <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;" required>
       </div>
+      <label style="font-size: 12px; display: block; text-align: left; margin: 10px auto;">
+        <input type="checkbox" id="consent" checked required>
+        I agree to the <a href="terms.html" target="_blank">Terms & Privacy Policy</a>
+      </label>
+      <button type="submit">See Plans & Prices</button>
     </form>
     <div class="confirmation" id="confirmation">
       🎉 You’re all set! Call now to speak with a licensed agent:<br>
@@ -164,12 +117,10 @@
     </div>
   </div>
   <div class="trust-logos">
-    <div class="logo-row">
-      <img src="Images/Aetna.png" alt="Aetna Logo" style="height: 35px;" />
-      <img src="Images/BCBS.png" alt="BCBS Logo" style="height: 35px;" />
-      <img src="Images/Cigna.png" alt="Cigna Logo" style="height: 35px;" />
-      <img src="Images/UHC.png" alt="UHC Logo" style="height: 35px;" />
-    </div>
+    <img src="Images/Aetna.png" alt="Aetna Logo" style="height: 35px;">
+    <img src="Images/BCBS.png" alt="BCBS Logo" style="height: 35px;">
+    <img src="Images/Cigna.png" alt="Cigna Logo" style="height: 35px;">
+    <img src="Images/UHC.png" alt="UHC Logo" style="height: 35px;">
   </div>
   <div class="testimonial">
     <p><em>"Saved me over $150 a month! Highly recommend." – Jessica P.</em></p>
@@ -181,22 +132,38 @@
     Your information is safe and secure. HIPAA-compliant & encrypted.
   </div>
   <script>
-    let currentStep = 0;
-    function showStep(step) {
-      const steps = document.querySelectorAll('.form-step');
-      steps.forEach((el, i) => el.style.display = i === step ? 'block' : 'none');
-      const bar = document.getElementById("progress-bar");
-      const percent = step === 0 ? 0 : step === 1 ? 50 : 75;
-      const message = step === 1 ? "Almost there!" : step === 2 ? "So close!" : "";
-      bar.style.width = percent + "%";
-      document.getElementById("progress-percent").textContent = percent + "%";
-      document.getElementById("progress-message").textContent = message;
-      currentStep = step;
-    }
-    function nextStep(step) { showStep(step); }
-    function prevStep(step) { showStep(step); }
-    document.addEventListener("DOMContentLoaded", function () {
-      showStep(0);
+    document.getElementById("quote-form").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const data = {
+        first_name: document.querySelector('input[name="first_name"]').value,
+        last_name: document.querySelector('input[name="last_name"]').value,
+        zip: document.querySelector('input[name="zip"]').value,
+        address: document.querySelector('input[name="address"]').value,
+        email: document.querySelector('input[name="email"]').value,
+        phone: document.querySelector('input[name="Primary_Phone"]').value,
+        dob: `${document.querySelector('input[name="dob_year"]').value}-${document.querySelector('input[name="dob_month"]').value}-${document.querySelector('input[name="dob_day"]').value}`,
+        consent: document.getElementById("consent").checked ? "Yes" : "No",
+        source_id: "IQ4U"
+      };
+
+      const response = await fetch("https://platinumhealthsolutions.leadportal.com/postlead.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "API-Key": "e4677464bee954fbcd822b31abb38ada74b84f9b3604200ea703427a2eea9212"
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.text();
+      console.log("Lead sent. Server response:", result);
+      document.getElementById("quote-form").style.display = "none";
+      document.getElementById("confirmation").style.display = "block";
+      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    });
+
+    window.addEventListener("DOMContentLoaded", function () {
       let timer = 300;
       const timerDisplay = document.getElementById("timer");
       setInterval(() => {
@@ -207,19 +174,7 @@
           timerDisplay.textContent = `${minutes}:${seconds}`;
         }
       }, 1000);
-      document.getElementById("quote-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        document.querySelectorAll('.form-step').forEach(step => step.style.display = 'none');
-        document.getElementById("confirmation").style.display = "block";
-        document.getElementById("progress-bar").style.width = "100%";
-        document.getElementById("progress-percent").textContent = "100%";
-        document.getElementById("progress-message").textContent = "Complete!";
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-      });
     });
   </script>
 </body>
 </html>
-
-  
-
