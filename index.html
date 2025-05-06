@@ -18,12 +18,25 @@
       color: #fff;
       padding: 10px;
       text-align: center;
+      position: relative;
     }
     .banner {
       background: #fefefe;
       padding: 10px;
       border-bottom: 2px solid #007bff;
       text-align: center;
+    }
+    .phone-number-header {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #007bff;
+      color: white;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     .countdown {
       background: #ffcc00;
@@ -98,26 +111,6 @@
       max-width: 320px;
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
-    .phone-number {
-  position: fixed;
-  bottom: 20px; /* Default spacing for larger screens */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #007bff;
-  color: white;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 767px) {
-  .phone-number {
-    bottom: 80px; /* Adjust this value to prevent overlap with the submit button on mobile */
-  }
-}
   </style>
 </head>
 <body>
@@ -125,6 +118,9 @@
     <div class="banner">
       <p style="margin: 0; font-size: 18px; font-weight: bold; color: #007bff;">✅ Get Instant Health Coverage Quotes</p>
       <p style="margin: 5px 0; font-size: 14px; color: #333;">Licensed Agents • ACA & Private Plans • All Major Carriers</p>
+    </div>
+    <div class="phone-number-header">
+      📞 Call us now: <a href="tel:8883680037" style="color: white; text-decoration: none; font-weight: bold;">1-888-368-0037</a>
     </div>
   </div>
   <div class="countdown">
@@ -156,7 +152,7 @@
       🎉 Thank you! Your quote request has been submitted. An agent will be calling you shortly!<br><br>
       -or-<br><br>
       📞 Call now to speak with a licensed agent:<br>
-      <strong><a href="tel:480-908-3784">480-908-3784</a></strong>
+      <strong><a href="tel:8883680037">1-888-368-0037</a></strong>
     </div>
   </div>
   <div class="trust-logos" style="margin-top: -10px;">
@@ -168,9 +164,6 @@
   <div class="testimonial">
     <p><em>"Saved me over $150 a month! Highly recommend." – Jessica P.</em></p>
   </div>
-  <div class="phone-number">
-  📞 Call us now: <a href="tel:8883680037" style="color: white; text-decoration: none; font-weight: bold;">1-888-368-0037</a>
-</div>
   <div class="privacy-note">
     Your information is safe and secure. HIPAA-compliant & encrypted.
   </div>
@@ -178,13 +171,13 @@
   <script>
     document.getElementById("quote-form").addEventListener("submit", function(event) {
       event.preventDefault();
-
+      
       // Collecting the form data
       const formData = new FormData(event.target);
     
       const data = {
         auth_token: 'sg19yks0iek24aeebmmgebhsuwxsmpd4', // Replace with your actual API token
-        adaptor_id: '', // Add relevant adaptor ID
+        adaptor_id: '',
         list_id: '9733', // Your list ID
         check_dup: 0,
         check_dup_archive: 0,
@@ -216,14 +209,14 @@
         province: '',
         postal_code: formData.get('zip'),
         country: '',
-        gender: '', // Add gender if needed
+        gender: '',
         date_of_birth: `${formData.get('dob_month')}-${formData.get('dob_day')}-${formData.get('dob_year')}`,
         note: '',
-        publisher: '' // Add publisher info if applicable
+        publisher: ''
       };
 
       // Sending data to Convoso API
-      fetch('https://api.convoso.com/v1/leads/insert', {
+      fetch('https://api.convoso.com/v1/leads/insert?auth_token=sg19yks0iek24aeebmmgebhsuwxsmpd4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
