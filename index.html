@@ -154,15 +154,72 @@
   <div class="privacy-note">
     Your information is safe and secure. HIPAA-compliant & encrypted.
   </div>
+
   <script>
     document.getElementById("quote-form").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      // Normally you would send form data to a server here
-      // For now, just show the thank you popup
+      // Collecting the form data
+      const formData = new FormData(event.target);
+    
+      const data = {
+        auth_token: 'sg19yks0iek24aeebmmgebhsuwxsmpd4', // Replace with your actual API token
+        adaptor_id: '', // Add relevant adaptor ID
+        list_id: '9733', // Your list ID
+        check_dup: 0,
+        check_dup_archive: 0,
+        check_dnc: 0,
+        check_wireless: 0,
+        hopper: 1,
+        hopper_priority: 99,
+        hopper_expires_in: 0,
+        update_if_found: '',
+        update_order_by_last_called_time: 'DESC',
+        blueinkdigital_token: '',
+        reject_by_carrier_type: '',
+        filter_phone_code: '',
+        lead_id: 0,
+        phone_code: 1, // Country code for phone number (example: 1 for USA)
+        created_by: '',
+        email: formData.get('email'),
+        last_modified_by: '',
+        owner_id: '',
+        first_name: formData.get('first_name'),
+        last_name: formData.get('last_name'),
+        phone_number: formData.get('Primary_Phone'),
+        alt_phone_1: '',
+        alt_phone_2: '',
+        address1: formData.get('address'),
+        address2: '',
+        city: formData.get('city'),
+        state: formData.get('state'),
+        province: '',
+        postal_code: formData.get('zip'),
+        country: '',
+        gender: '', // Add gender if needed
+        date_of_birth: `${formData.get('dob_month')}-${formData.get('dob_day')}-${formData.get('dob_year')}`,
+        note: '',
+        publisher: '' // Add publisher info if applicable
+      };
 
-      document.getElementById("thankyou-popup").style.display = "flex";
-      confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+      // Sending data to Convoso API
+      fetch('https://api.convoso.com/v1/leads/insert', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        // Show thank you message
+        document.getElementById("thankyou-popup").style.display = "flex";
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     });
 
     window.addEventListener("DOMContentLoaded", function () {
@@ -180,6 +237,3 @@
   </script>
 </body>
 </html>
-</html>
-
-
