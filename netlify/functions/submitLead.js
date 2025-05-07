@@ -22,7 +22,7 @@ exports.handler = async (event) => {
 
     const convosoParams = new URLSearchParams({
       auth_token: "sg19yks0iek24aeebmmgebhsuwxsmpd4",
-      list_id: "9733",
+      list_id: "9689",
       check_dup: "0",
       check_dup_archive: "0",
       check_dnc: "0",
@@ -44,7 +44,8 @@ exports.handler = async (event) => {
     const fullURL = `${convosoBaseURL}?${convosoParams}`;
     console.log("🚨 Final Convoso URL:", fullURL);
 
-    const response = await fetch(fullURL);
+    // Make the request to Convoso API from the server
+    const response = await fetch(fullURL, { method: "POST" });
     const json = await response.json();
 
     console.log("✅ Convoso response:", json);
