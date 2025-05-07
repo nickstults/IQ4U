@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Get a Free Health Insurance Quote | Care Coverage Quotes</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f7fb;
+      color: #333;
+    }
+    .header {
+      background: #007bff;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: relative;
+    }
+    .banner {
+      background: #fefefe;
+      padding: 10px;
+      border-bottom: 2px solid #007bff;
+      text-align: center;
+    }
+    .countdown {
+      background: #ffcc00;
+      text-align: center;
+      font-size: 24px;
+      padding: 10px;
+    }
+    .form-container {
+      max-width: 300px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      border: 2px solid #000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      position: relative;
+    }
+    input[type="text"], input[type="email"], input[type="tel"] {
+      width: 80%;
+      padding: 8px;
+      margin: 8px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      display: block;
+      text-align: center;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .trust-logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 20px auto;
+    }
+    .testimonial, .phone-number, .privacy-note, .confirmation {
+      text-align: center;
+      margin: 20px auto;
+    }
+    .confirmation {
+      display: none;
+      font-size: 20px;
+    }
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup-box {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 320px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="banner">
+      <p style="margin: 0; font-size: 18px; font-weight: bold; color: #007bff;">✅ Get Instant Health Coverage Quotes</p>
+      <p style="margin: 5px 0; font-size: 14px; color: #333;">Licensed Agents • ACA & Private Plans • All Major Carriers</p>
+      <p style="margin: 5px 0; font-size: 16px; color: white; background-color: #007bff; padding: 10px; border-radius: 8px; font-weight: bold;">
+        📞 Call us now: <a href="tel:6592207103" style="color: white; text-decoration: none; font-weight: bold;">659-220-7103</a>
+      </p>
+    </div>
+  </div>
+  <div class="countdown">
+    We're holding your spot in the queue: <span id="timer" style="color: red;">05:00</span>
+  </div>
+  <div class="form-container">
+    <h2 style="text-align: center;">Get a Free Quote Now</h2>
+    <form id="quote-form">
+      <input type="text" name="first_name" placeholder="First Name" required>
+      <input type="text" name="last_name" placeholder="Last Name" required>
+      <input type="text" name="zip" placeholder="ZIP Code" required>
+      <input type="text" name="address" placeholder="Home Address" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="Primary_Phone" placeholder="Phone Number" required>
+      <div style="display: flex; gap: 5px; justify-content: center;">
+        <input type="text" name="dob_month" placeholder="MM" style="width: 30%;" required>
+        <input type="text" name="dob_day" placeholder="DD" style="width: 30%;" required>
+        <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;" required>
+      </div>
+      <label style="font-size: 16px; display: block; text-align: left; margin: 10px auto;">
+        <input type="checkbox" id="consent" checked required>
+        I agree to the <a href="terms.html" target="_blank">Terms & Privacy Policy</a>
+      </label>
+      <button type="submit">See Plans & Prices</button>
+    </form>
+  </div>
+  <div class="popup-overlay" id="thankyou-popup">
+    <div class="popup-box">
+      🎉 Thank you! Your quote request has been submitted. An agent will be calling you shortly!<br><br>
+      -or-<br><br>
+      📞 Call now to speak with a licensed agent:<br>
+      <strong><a href="tel:8883680037">1-888-368-0037</a></strong>
+    </div>
+  </div>
+  <div class="trust-logos" style="margin-top: -10px;">
+    <img src="Images/Aetna.png" alt="Aetna Logo" style="height: 35px;">
+    <img src="Images/BCBS.png" alt="BCBS Logo" style="height: 35px;">
+    <img src="Images/Cigna.png" alt="Cigna Logo" style="height: 35px;">
+    <img src="Images/UHC.png" alt="UHC Logo" style="height: 35px;">
+  </div>
+  <div class="testimonial">
+    <p><em>"Saved me over $150 a month! Highly recommend." – Jessica P.</em></p>
+  </div>
+  <div class="privacy-note">
+    Your information is safe and secure. HIPAA-compliant & encrypted.
+  </div>
+
+  <!-- JavaScript goes here -->
+  <script>
+    document.getElementById("quote-form").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  // Collecting the form data
+  const formData = new FormData(event.target);
+
+  const data = {
+    first_name: formData.get('first_name'),
+    last_name: formData.get('last_name'),
+    zip: formData.get('zip'),
+    address: formData.get('address'),
+    email: formData.get('email'),
+    Primary_Phone: formData.get('Primary_Phone'),
+    dob_month: formData.get('dob_month'),
+    dob_day: formData.get('dob_day'),
+    dob_year: formData.get('dob_year')
+  };
+
+  // Prepare the API endpoint with the necessary data
+  const url = `https://api.convoso.com/v1/leads/insert?auth_token=sg19yks0iek24aeebmmgebhsuwxsmpd4&adaptor_id=&list_id=9733&check_dup=0&check_dup_archive=0&check_dnc=0&check_wireless=0&hopper=1&hopper_priority=99&hopper_expires_in=0&update_if_found=&update_order_by_last_called_time=DESC&blueinkdigital_token=&reject_by_carrier_type=&filter_phone_code=&lead_id=0&phone_code=1&created_by=&email=${data.email}&last_modified_by=&owner_id=&first_name=${data.first_name}&last_name=${data.last_name}&phone_number=${data.Primary_Phone}&alt_phone_1=&alt_phone_2=&address1=${data.address}&address2=&city=&state=&province=&postal_code=${data.zip}&country=&gender=&date_of_birth=${data.dob_month}-${data.dob_day}-${data.dob_year}&note=&publisher=`;
+
+  // Send data to Convoso API
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    // Show thank you message
+    document.getElementById("thankyou-popup").style.display = "flex";
+    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+    });
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1360021698563579');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1360021698563579&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+</body>
+</html>
