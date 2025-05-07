@@ -1,43 +1,62 @@
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 
-exports.handler = async function(event, context) {
-  if (event.httpMethod === 'POST') {
-    const data = JSON.parse(event.body);
+exports.handler = async (event) => {
+  try {
+    const body = JSON.parse(event.body);
+    const {
+      first_name,
+      last_name,
+      address,
+      email,
+      phone_number,
+      date_of_birth,
+      ip_address,
+      timestamp,
+      zip = "", // fallback below if blank
+    } = body;
 
-    // Validate incoming data
-    if (!data.first_name || !data.last_name || !data.email) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Missing required fields.' }),
-      };
-    }
+    const convosoBaseURL = "https://api.convoso.com/v1/leads/insert";
 
-    try {
-      // Send data to Convoso API or another API (this can be expanded as per your needs)
-      const response = await fetch('https://api.convoso.com/v1/leads/insert?auth_token=sg19yks0iek24aeebmmgebhsuwxsmpd4&adaptor_id=&list_id=9733&check_dup=0&check_dup_archive=0&check_dnc=0&check_wireless=0&hopper=1&hopper_priority=99&hopper_expires_in=0&update_if_found=&update_order_by_last_called_time=DESC&blueinkdigital_token=&reject_by_carrier_type=&filter_phone_code=&lead_id=0&phone_code=1&created_by=&email=' + data.email + '&last_modified_by=&owner_id=&first_name=' + data.first_name + '&last_name=' + data.last_name + '&phone_number=' + data.Primary_Phone + '&alt_phone_1=&alt_phone_2=&address1=' + data.address + '&address2=&city=&state=&province=&postal_code=' + data.zip + '&country=&gender=&date_of_birth=' + data.dob_month + '-' + data.dob_day + '-' + data.dob_year + '&note=&publisher=', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    // fallback to use digits from address if zip missing
+    const postal_code = zip || (address.match(/\d{5}/) || [])[0] || "";
 
-      const responseData = await response.json();
+    const convosoParams = new URLSearchParams({
+      auth_token: "sg19yks0iek24aeebmmgebhsuwxsmpd4",
+      list_id: "9733",
+      check_dup: "0",
+      check_dup_archive: "0",
+      check_dnc: "0",
+      check_wireless: "0",
+      hopper: "1",
+      hopper_priority: "99",
+      update_order_by_last_called_time: "DESC",
+      phone_code: "1",
+      first_name: first_name || "",
+      last_name: last_name || "",
+      phone_number: phone_number || "",
+      address1: address || "",
+      postal_code: postal_code,
+      email: email || "",
+      date_of_birth: date_of_birth || "",
+      publisher: "IQ4U"
+    }).toString();
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'Lead submitted successfully', data: responseData }),
-      };
-    } catch (error) {
-      console.error(error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Something went wrong.' }),
-      };
-    }
-  } else {
+    const fullURL = `${convosoBaseURL}?${convosoParams}`;
+    console.log("🚨 Final Convoso URL:", fullURL);
+
+    const response = await fetch(fullURL);
+    const json = await response.json();
+
+    console.log("✅ Convoso response:", json);
     return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method Not Allowed' }),
+      statusCode: 200,
+      body: JSON.stringify({ success: true, convoso: json }),
+    };
+  } catch (error) {
+    console.error("❌ Convoso Error:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ success: false, error: error.message }),
     };
   }
 };
