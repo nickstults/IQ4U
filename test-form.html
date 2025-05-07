@@ -1,104 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get a Free Health Insurance Quote | Care Coverage Quotes</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f2f7fb;
-      color: #333;
-    }
-    .form-container {
-      max-width: 300px;
-      margin: 40px auto;
-      background: #fff;
-      padding: 10px;
-      border-radius: 12px;
-      border: 2px solid #000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      overflow: hidden;
-      position: relative;
-    }
-    input[type="text"], input[type="email"], input[type="tel"] {
-      width: 80%;
-      padding: 8px;
-      margin: 8px auto;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 14px;
-      display: block;
-      text-align: center;
-    }
-    button {
-      background: #007bff;
-      color: white;
-      padding: 12px;
-      width: 100%;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="form-container">
-    <h2>Get a Free Quote Now</h2>
-    <form id="quote-form">
-      <input type="text" name="first_name" placeholder="First Name">
-      <input type="text" name="last_name" placeholder="Last Name">
-      <input type="text" name="zip" placeholder="ZIP Code">
-      <input type="text" name="address" placeholder="Home Address">
-      <input type="email" name="email" placeholder="Email Address">
-      <input type="tel" name="Primary_Phone" placeholder="Phone Number">
-      <div style="display: flex; gap: 5px; justify-content: center;">
-        <input type="text" name="dob_month" placeholder="MM" style="width: 30%;">
-        <input type="text" name="dob_day" placeholder="DD" style="width: 30%;">
-        <input type="text" name="dob_year" placeholder="YYYY" style="width: 30%;">
-      </div>
-      <label style="font-size: 12px; display: block; text-align: left; margin: 10px auto;">
-        <input type="checkbox" id="consent" checked required>
-        I agree to the <a href="terms.html" target="_blank">Terms & Privacy Policy</a>
-      </label>
-      <button type="submit">See Plans & Prices</button>
-    </form>
-  </div>
-
-  <script>
-    document.getElementById("quote-form").addEventListener("submit", async function(event) {
+document.getElementById("quote-form").addEventListener("submit", async function(event) {
   event.preventDefault();
 
+  // Collect the form data
   const data = {
     first_name: document.querySelector('input[name="first_name"]').value,
     last_name: document.querySelector('input[name="last_name"]').value,
     zip: document.querySelector('input[name="zip"]').value,
-    address1: document.querySelector('input[name="address"]').value,
+    address: document.querySelector('input[name="address"]').value,
     email: document.querySelector('input[name="email"]').value,
-    phone_number: document.querySelector('input[name="Primary_Phone"]').value,
-    dob: `${document.querySelector('input[name="dob_year"]').value}-${document.querySelector('input[name="dob_month"]').value}-${document.querySelector('input[name="dob_day"]').value}`,
-    consent: document.getElementById("consent").checked ? "Yes" : "No",
-    publisher: "IQ4U", // Adjust as needed
-    // Add any other parameters required by the API
-    adaptor_id: "", // Your adaptor ID
-    list_id: "9733", // Your list ID
-    check_dup: "0",
-    check_dup_archive: "0",
-    check_dnc: "0",
-    check_wireless: "0",
-    hopper: "1",
-    hopper_priority: "99",
-    hopper_expires_in: "0",
-    update_if_found: "",
-    update_order_by_last_called_time: "DESC",
-    phone_code: "1", // Adjust as needed
-    created_by: "", // Adjust as needed
-    gender: "", // Adjust as needed
-  </script>
-</body>
-</html>
+    Primary_Phone: document.querySelector('input[name="Primary_Phone"]').value,
+    dob_year: document.querySelector('input[name="dob_year"]').value,
+    dob_month: document.querySelector('input[name="dob_month"]').value,
+    dob_day: document.querySelector('input[name="dob_day"]').value,
+    consent: document.getElementById("consent").checked,
+  };
+
+  try {
+    // Send the form data to your backend server
+    const response = await fetch('/submit-lead', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert("Thank you! Your info has been submitted.");
+    } else {
+      alert("There was an error submitting your info. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Network error. Please try again.");
+  }
+});
