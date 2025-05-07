@@ -13,7 +13,7 @@ exports.handler = async function(event, context) {
 
     // Send data to Convoso API or another API (this can be expanded as per your needs)
     try {
-      const response = await fetch('https://api.convoso.com/v1/leads/insert?auth_token=YOUR_AUTH_TOKEN', {
+      const response = await fetch('https://api.convoso.com/v1/leads/sg19yks0iek24aeebmmgebhsuwxsmpd4&amp;', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
