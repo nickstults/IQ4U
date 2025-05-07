@@ -2,9 +2,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+const cors = require('cors');  // Import cors middleware
 
 // Create an instance of Express
 const app = express();
+
+// Use CORS middleware to allow requests from any origin
+app.use(cors());  // This allows all domains to make requests to your server
 
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
