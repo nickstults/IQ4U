@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
-exports.handler = async (event) => {
+exports.handler = async function(event, context) {
   try {
     const body = JSON.parse(event.body);
     const {
@@ -12,16 +12,15 @@ exports.handler = async (event) => {
       date_of_birth,
       ip_address,
       timestamp,
-      zip = "", // fallback below if blank
+      zip = "", 
     } = body;
 
     const convosoBaseURL = "https://api.convoso.com/v1/leads/insert";
 
-    // fallback to use digits from address if zip missing
     const postal_code = zip || (address.match(/\d{5}/) || [])[0] || "";
 
     const convosoParams = new URLSearchParams({
-      auth_token: "sg19yks0iek24aeebmmgebhsuwxsmpd4",
+      auth_token: process.env.CONVOSO_API_KEY,  // Use environment variable
       list_id: "9689",
       check_dup: "0",
       check_dup_archive: "0",
@@ -44,30 +43,19 @@ exports.handler = async (event) => {
     const fullURL = `${convosoBaseURL}?${convosoParams}`;
     console.log("🚨 Final Convoso URL:", fullURL);
 
-    // Make the request to Convoso API from the server
-    const response = await fetch(fullURL, { method: "POST" });
+    const response = await fetch(fullURL);
     const json = await response.json();
 
     console.log("✅ Convoso response:", json);
     return {
       statusCode: 200,
       body: JSON.stringify({ success: true, convoso: json }),
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Allow any origin to access this API
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
     };
   } catch (error) {
     console.error("❌ Convoso Error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ success: false, error: error.message }),
-      headers: {
-        "Access-Control-Allow-Origin": "*", // Allow any origin to access this API
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
     };
   }
 };
