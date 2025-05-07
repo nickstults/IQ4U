@@ -38,7 +38,7 @@ exports.handler = async (event) => {
       postal_code: postal_code,
       email: email || "",
       date_of_birth: date_of_birth || "",
-      publisher: "IQ4U"
+      publisher: "healthquotepros"
     }).toString();
 
     const fullURL = `${convosoBaseURL}?${convosoParams}`;
@@ -51,12 +51,22 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({ success: true, convoso: json }),
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow any origin to access this API
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
     };
   } catch (error) {
     console.error("❌ Convoso Error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ success: false, error: error.message }),
+      headers: {
+        "Access-Control-Allow-Origin": "*", // Allow any origin to access this API
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
     };
   }
 };
